@@ -4,5 +4,9 @@ import lombok.Data;
 
 @Data
 public class LoginResponseDto {
-    private String key;
+    private String loginKey;
+
+    public LoginResponseDto(String loginKey){
+        this.loginKey=loginKey;
+    }
 }

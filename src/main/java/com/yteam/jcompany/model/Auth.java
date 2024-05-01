@@ -22,18 +22,18 @@ public class Auth {
     @Column(name="id", updatable = false)
     Long id;
 
-    @Column(name = "user_name", nullable = false)
+    @Column(name = "user_name", nullable = false, unique = true)
     String userName;
 
     @Column(name = "password", nullable = false)
     String password;
 
     @Column(name = "login_key", nullable = false)
-    String key;
+    String loginKey;
 
     @OneToOne(cascade=CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "company_id", nullable = true)
     Company company;
     
 }

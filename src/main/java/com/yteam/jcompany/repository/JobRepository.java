@@ -1,5 +1,9 @@
 package com.yteam.jcompany.repository;
 
-public class JobRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.yteam.jcompany.model.Job;
+
+public interface JobRepository extends JpaRepository<Job,Long> {
     
 }
