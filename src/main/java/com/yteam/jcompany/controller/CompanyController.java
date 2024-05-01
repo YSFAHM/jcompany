@@ -1,5 +1,60 @@
 package com.yteam.jcompany.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.yteam.jcompany.dto.CompanyDto;
+import com.yteam.jcompany.dto.ResponseDto;
+import com.yteam.jcompany.model.Company;
+import com.yteam.jcompany.service.Interface.CompanyService;
+
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+
+@RestController
+@RequestMapping("/companies")
 public class CompanyController {
+    @Autowired
+    private CompanyService companyService;
+
+    @GetMapping("/all")
+    public ResponseEntity<List<CompanyDto>> getAllCompanies() {
+        List<CompanyDto> companies=companyService.getAllCompanies();
+        return ResponseEntity.ok(companies);
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<ResponseDto> updateCompany(@RequestBody @Valid CompanyDto companyDto) {
+        ResponseDto responseDto = companyService.updateCompany(companyDto);
+        
+        return ResponseEntity.ok(responseDto);
+    }
+    @GetMapping("{id}")
+    public CompanyDto getCompanyByID(@PathVariable Long id) {
+        return companyService.findCompanyById(id);
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<ResponseDto> deleteCompany(Long id){
+        ResponseDto responseDto = companyService.deleteCompany(id);
+        return ResponseEntity.ok(responseDto);
+
+    }
+    
+    
     
 }

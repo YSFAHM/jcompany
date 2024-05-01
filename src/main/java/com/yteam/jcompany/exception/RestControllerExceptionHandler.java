@@ -46,5 +46,13 @@ public class RestControllerExceptionHandler {
 		return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
 	}
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ResponseDto> resolveException(ResourceNotFoundException exception) {
+
+		ResponseDto responseDto = new ResponseDto(exception.getMessage());
+		return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
+	}
+
+
 
 }

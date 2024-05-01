@@ -1,9 +1,8 @@
 package com.yteam.jcompany.exception;
 
-public class ValidationException extends RuntimeException {
+public class ResourceNotFoundException extends RuntimeException {
     private String message;
-    public ValidationException(String message) {
-		super(message);
+    public ResourceNotFoundException(String message) {
 		this.message = message;
 	}
     public String getMessage() {
@@ -13,5 +12,4 @@ public class ValidationException extends RuntimeException {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-    
 }
