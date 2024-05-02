@@ -8,4 +8,5 @@ import com.yteam.jcompany.model.Application;
 
 public interface ApplicationRepository extends JpaRepository<Application,Long> {
     public List<Application> findAllByJobId(Long JobId);
+    
 }
