@@ -21,7 +21,7 @@ public class ApplicationMapper {
     public static Application toModel(ApplicationDto applicationDto) {
         Application application = new Application();
         Job job = new Job();
-        job.setId(applicationDto.getId());
+        job.setId(applicationDto.getJobId());
         application.setId(applicationDto.getId());
         application.setName(applicationDto.getName());
         application.setEmail(applicationDto.getEmail());

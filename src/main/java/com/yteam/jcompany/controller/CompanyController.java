@@ -34,10 +34,10 @@ public class CompanyController {
         List<CompanyDto> companies=companyService.getAllCompanies();
         return ResponseEntity.ok(companies);
     }
-
-    @PutMapping("/")
-    public ResponseEntity<ResponseDto> updateCompany(@RequestBody @Valid CompanyDto companyDto) {
-        ResponseDto responseDto = companyService.updateCompany(companyDto);
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<ResponseDto> updateCompany(@RequestBody @Valid CompanyDto companyDto,@PathVariable Long id) {
+        ResponseDto responseDto = companyService.updateCompany(id,companyDto);
         
         return ResponseEntity.ok(responseDto);
     }

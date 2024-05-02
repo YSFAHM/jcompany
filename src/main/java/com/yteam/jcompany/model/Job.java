@@ -10,17 +10,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(uniqueConstraints={
+    @UniqueConstraint(columnNames={"company_id", "title"})
+})
 public class Job {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id", updatable = false)
     private Long id;
 
-    @Column(name = "title", nullable = false,unique = true)
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "location", nullable = false)

@@ -29,7 +29,7 @@ public class AuthServiceImp implements AuthServcie {
         Auth recievedAuth = LoginDto.toModel(loginDto);
         Auth auth = authRepository.findByUserName(recievedAuth.getUserName()).orElseThrow(()->new UnauthenticatedException("user name not found"));
         if(recievedAuth.getPassword().equals(auth.getPassword())){
-            return new LoginResponseDto(auth.getLoginKey());
+            return new LoginResponseDto(auth.getLoginKey(),auth.getCompany().getId());
         }else{
             throw new UnauthenticatedException("Wrong Password");
         }

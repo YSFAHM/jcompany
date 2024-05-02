@@ -15,7 +15,7 @@ import com.yteam.jcompany.service.Interface.AuthServcie;
 public class AuthAspect {
     @Autowired
     AuthServcie authServcie;
-    @Before("execution(* com.yteam.jcompany.controller..*..*(..)) && args(.., request)")
+    @Before("execution(* com.yteam.jcompany.controller..*..*(..)) && args(.., loginKey)")
     public void beforeControllerMethodExecution(String loginKey) {
         String headerValue = loginKey;
         if(!authServcie.isAuthenticated(headerValue)){

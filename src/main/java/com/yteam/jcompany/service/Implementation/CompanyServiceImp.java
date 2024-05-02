@@ -22,9 +22,10 @@ public class CompanyServiceImp implements CompanyService {
     private CompanyRepository companyRepository;
 
     @Override
-    public ResponseDto updateCompany(CompanyDto companyDto) {
+    public ResponseDto updateCompany(Long id,CompanyDto companyDto) {
         Company receivedCompany = CompanyMapper.toModel(companyDto);
-        Company company = companyRepository.findById(receivedCompany.getId()).orElseThrow(()->new ResourceNotFoundException("An error happened"));
+        receivedCompany.setId(id);
+        Company company = companyRepository.findById(receivedCompany.getId()).orElseThrow(()->new ResourceNotFoundException("Company does not exist"));
         Boolean isEmailExist = companyRepository.existsByEmail(receivedCompany.getEmail());
         if(isEmailExist&&!(company.getEmail().equals(receivedCompany.getEmail()))){
             throw new DuplicateKeyException("email already exists");
@@ -39,6 +40,7 @@ public class CompanyServiceImp implements CompanyService {
     
     public List<CompanyDto> getAllCompanies(){
         List<Company> companies= companyRepository.findAll();
+        if(companies.size()==0) throw new ResourceNotFoundException("nothing found");
         List<CompanyDto> companiesDtos = new ArrayList<>();
         for(Company company : companies ){
             companiesDtos.add(CompanyMapper.toDto(company));

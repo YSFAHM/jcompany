@@ -12,6 +12,7 @@ import com.yteam.jcompany.dto.JobDto;
 import com.yteam.jcompany.dto.ResponseDto;
 import com.yteam.jcompany.exception.ResourceNotFoundException;
 import com.yteam.jcompany.model.Job;
+import com.yteam.jcompany.repository.CompanyRepository;
 import com.yteam.jcompany.repository.JobRepository;
 import com.yteam.jcompany.service.Interface.JobService;
 
@@ -19,6 +20,7 @@ import com.yteam.jcompany.service.Interface.JobService;
 public class JobServiceImp implements JobService {
     @Autowired
     private JobRepository jobRepository;
+    @Autowired CompanyRepository companyRepository;
 
     @Override
     public ResponseDto addJob(JobDto jobDto) {
@@ -26,6 +28,11 @@ public class JobServiceImp implements JobService {
         if(jobRepository.existsByTitle(recievedJob.getTitle())){
             throw new DuplicateKeyException("job already exists");
         }
+        if(!companyRepository.existsById(recievedJob.getCompany().getId())){
+            throw new ResourceNotFoundException("Company is not found");
+        }
+
+
         jobRepository.save(recievedJob);
         ResponseDto responseDto = new ResponseDto("job added successfully");
         return responseDto;
@@ -33,7 +40,7 @@ public class JobServiceImp implements JobService {
 
     @Override
     public ResponseDto deleteJobById(Long id) {
-        if(jobRepository.existsById(id)){
+        if(!jobRepository.existsById(id)){
             throw new ResourceNotFoundException("job not found");
         }
         jobRepository.deleteById(id);
@@ -44,6 +51,7 @@ public class JobServiceImp implements JobService {
     @Override
     public List<JobDto> getAllJobs() {
         List<Job> jobs= jobRepository.findAll();
+        if(jobs.size()==0) throw new ResourceNotFoundException("nothing found");
         List<JobDto> jobsDtos = new ArrayList<>();
         for(Job job : jobs ){
             jobsDtos.add(JobMapper.toDto(job));
@@ -57,18 +65,33 @@ public class JobServiceImp implements JobService {
         return JobMapper.toDto(job);
     }
 
+
+    // need to be handled : company id
     @Override
-    public ResponseDto updateJob(JobDto jobDto) {
+    public ResponseDto updateJob(Long id,JobDto jobDto) {
         Job recievedJob = JobMapper.toModel(jobDto);
-        if(jobRepository.existsById(recievedJob.getId())){
-            throw new ResourceNotFoundException("job not found");
-        }
-        if(jobRepository.existsByTitle(recievedJob.getTitle())){
+        recievedJob.setId(id);
+        Job job = jobRepository.findById(id).orElseThrow(() ->new ResourceNotFoundException("job not found"));
+
+        if(jobRepository.existsByTitle(recievedJob.getTitle())&&!(job.getTitle().equals(recievedJob.getTitle()))){
             throw new DuplicateKeyException("job already exists");
         }
         jobRepository.save(recievedJob);
         ResponseDto responseDto = new ResponseDto("job updated successfully");
         return responseDto;
     }
+
+    @Override
+    public List<JobDto> getAllJobsByCompanyId(Long companyId) {
+        List<Job> jobs= jobRepository.findByCompanyId(companyId);
+        if(jobs.size()==0) throw new ResourceNotFoundException("nothing found");
+        List<JobDto> jobsDtos = new ArrayList<>();
+        for(Job job : jobs ){
+            jobsDtos.add(JobMapper.toDto(job));
+        }
+        return jobsDtos;
+    }
+    
+
 
 }

@@ -9,7 +9,7 @@ public class JobMapper {
     public static Job toModel(JobDto jobDto){
         Job job = new Job();
         Company company = new Company();
-        company.setId(jobDto.getId());
+        company.setId(jobDto.getCompanyId());
         job.setId(jobDto.getId());
         job.setTitle(jobDto.getTitle());
         job.setLocation(jobDto.getLocation());

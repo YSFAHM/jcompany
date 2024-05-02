@@ -6,7 +6,7 @@ import com.yteam.jcompany.dto.CompanyDto;
 import com.yteam.jcompany.dto.ResponseDto;
 
 public interface CompanyService {
-    public ResponseDto updateCompany(CompanyDto companyDto);
+    public ResponseDto updateCompany(Long id,CompanyDto companyDto);
     public List<CompanyDto> getAllCompanies();
     public CompanyDto findCompanyById(Long Id);
     public ResponseDto deleteCompany(Long id);

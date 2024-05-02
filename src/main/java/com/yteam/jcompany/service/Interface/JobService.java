@@ -10,6 +10,7 @@ public interface JobService {
     public ResponseDto deleteJobById(Long id);
     public List<JobDto> getAllJobs();
     public JobDto getJobById(Long id);
-    public ResponseDto updateJob(JobDto job);
+    public List<JobDto> getAllJobsByCompanyId(Long companyId);
+    public ResponseDto updateJob(Long id,JobDto job);
 
 }
