@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import com.yteam.jcompany.Mapper.CompanyMapper;
 import com.yteam.jcompany.dto.CompanyDto;
 import com.yteam.jcompany.dto.ResponseDto;
 import com.yteam.jcompany.exception.ResourceNotFoundException;
+import com.yteam.jcompany.mapper.CompanyMapper;
 import com.yteam.jcompany.model.Company;
 import com.yteam.jcompany.repository.CompanyRepository;
 import com.yteam.jcompany.service.Interface.CompanyService;

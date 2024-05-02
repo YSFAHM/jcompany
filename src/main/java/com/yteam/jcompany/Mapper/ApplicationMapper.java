@@ -1,4 +1,4 @@
-package com.yteam.jcompany.Mapper;
+package com.yteam.jcompany.mapper;
 
 import com.yteam.jcompany.dto.ApplicationDto;
 import com.yteam.jcompany.model.Application;

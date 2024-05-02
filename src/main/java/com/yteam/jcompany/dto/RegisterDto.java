@@ -1,5 +1,5 @@
 package com.yteam.jcompany.dto;
-import com.yteam.jcompany.Mapper.CompanyMapper;
+import com.yteam.jcompany.mapper.CompanyMapper;
 import com.yteam.jcompany.model.Auth;
 
 import jakarta.validation.Valid;
