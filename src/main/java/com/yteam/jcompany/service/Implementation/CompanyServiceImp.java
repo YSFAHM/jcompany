@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import com.yteam.jcompany.Mapper.CompanyMapper;
 import com.yteam.jcompany.dto.CompanyDto;
 import com.yteam.jcompany.dto.ResponseDto;
 import com.yteam.jcompany.exception.ResourceNotFoundException;
@@ -22,7 +23,7 @@ public class CompanyServiceImp implements CompanyService {
 
     @Override
     public ResponseDto updateCompany(CompanyDto companyDto) {
-        Company receivedCompany = CompanyDto.toModel(companyDto);
+        Company receivedCompany = CompanyMapper.toModel(companyDto);
         Company company = companyRepository.findById(receivedCompany.getId()).orElseThrow(()->new ResourceNotFoundException("An error happened"));
         Boolean isEmailExist = companyRepository.existsByEmail(receivedCompany.getEmail());
         if(isEmailExist&&!(company.getEmail().equals(receivedCompany.getEmail()))){
@@ -40,7 +41,7 @@ public class CompanyServiceImp implements CompanyService {
         List<Company> companies= companyRepository.findAll();
         List<CompanyDto> companiesDtos = new ArrayList<>();
         for(Company company : companies ){
-            companiesDtos.add(CompanyDto.toDto(company));
+            companiesDtos.add(CompanyMapper.toDto(company));
         }
         return companiesDtos;
 
@@ -48,11 +49,11 @@ public class CompanyServiceImp implements CompanyService {
 
     public CompanyDto findCompanyById(Long id){
         Company company = companyRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("company does not exist"));
-        return CompanyDto.toDto(company);
+        return CompanyMapper.toDto(company);
     }
 
     public ResponseDto deleteCompany(Long id){
-        Company company = companyRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("company does not exist"));
+        companyRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("company does not exist"));
         companyRepository.deleteById(id);
         return new ResponseDto("company deleted successfully");
     }

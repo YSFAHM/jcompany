@@ -10,16 +10,14 @@ import com.yteam.jcompany.exception.UnauthenticatedException;
 
 import com.yteam.jcompany.service.Interface.AuthServcie;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 @Aspect
 @Component
 public class AuthAspect {
     @Autowired
     AuthServcie authServcie;
     @Before("execution(* com.yteam.jcompany.controller..*..*(..)) && args(.., request)")
-    public void beforeControllerMethodExecution(HttpServletRequest request) {
-        String headerValue = request.getHeader("Login-Key");
+    public void beforeControllerMethodExecution(String loginKey) {
+        String headerValue = loginKey;
         if(!authServcie.isAuthenticated(headerValue)){
             throw new UnauthenticatedException("you are not authenticated");
     }

@@ -1,4 +1,5 @@
 package com.yteam.jcompany.dto;
+import com.yteam.jcompany.Mapper.CompanyMapper;
 import com.yteam.jcompany.model.Auth;
 
 import jakarta.validation.Valid;
@@ -26,7 +27,7 @@ public class RegisterDto {
         Auth auth = new Auth();
         auth.setUserName(registerDto.getUserName());
         auth.setPassword(registerDto.getPassword());
-        auth.setCompany(CompanyDto.toModel(registerDto.getCompany()));
+        auth.setCompany(CompanyMapper.toModel(registerDto.getCompany()));
         return auth;
 
     }
@@ -36,7 +37,7 @@ public class RegisterDto {
         RegisterDto registerDto = new RegisterDto();
         registerDto.setUserName(auth.getUserName());
         registerDto.setPassword(auth.getPassword());
-        registerDto.setCompany(CompanyDto.toDto(auth.getCompany()));
+        registerDto.setCompany(CompanyMapper.toDto(auth.getCompany()));
         return registerDto;
     }
 }

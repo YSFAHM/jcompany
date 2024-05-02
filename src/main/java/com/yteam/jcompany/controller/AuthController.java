@@ -9,7 +9,6 @@ import com.yteam.jcompany.dto.RegisterDto;
 import com.yteam.jcompany.dto.ResponseDto;
 import com.yteam.jcompany.service.Interface.AuthServcie;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseDto> Register(@RequestBody @Valid RegisterDto registerDto,HttpServletRequest request) {
+    public ResponseEntity<ResponseDto> Register(@RequestBody @Valid RegisterDto registerDto) {
         ResponseDto responseDto = authServcie.register(registerDto);
         return new ResponseEntity<>(responseDto,HttpStatus.CREATED);
     }

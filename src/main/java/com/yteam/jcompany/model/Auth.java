@@ -33,7 +33,7 @@ public class Auth {
 
     @OneToOne(cascade=CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "company_id", nullable = true)
+    @JoinColumn(name = "company_id", nullable = false)
     Company company;
     
 }

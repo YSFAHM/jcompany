@@ -2,6 +2,7 @@ package com.yteam.jcompany.dto;
 
 
 
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ public class ApplicationDto {
     private String phoneNumber;
 
     @NotBlank(message = "cv link is required")
+    //@URL
     private String cvUrl;
 
     @NotNull(message = "job is not defined")
