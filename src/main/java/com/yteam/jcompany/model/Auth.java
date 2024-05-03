@@ -2,7 +2,6 @@ package com.yteam.jcompany.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,6 +32,7 @@ public class Auth {
 
     @OneToOne(cascade=CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    
     @JoinColumn(name = "company_id", nullable = false)
     Company company;
     

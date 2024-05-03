@@ -26,6 +26,7 @@ public class ApplicationController {
     private ApplicationService applicationService;
     @GetMapping("/{id}")
     public ResponseEntity<ApplicationDto> getApplicationById(@PathVariable Long id) {
+        
         return ResponseEntity.ok(applicationService.getApplicationById(id));
     }
 
