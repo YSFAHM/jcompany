@@ -44,7 +44,7 @@ public class ApplicationServiceImp implements ApplicationService {
 
     @Override
     public ApplicationDto getApplicationById(Long id) {
-        Application application = applicationRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Job not found"));
+        Application application = applicationRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("application not found"));
         return ApplicationMapper.toDto(application);
     }
     
