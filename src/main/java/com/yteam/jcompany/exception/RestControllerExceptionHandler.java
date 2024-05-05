@@ -31,8 +31,7 @@ public class RestControllerExceptionHandler {
 		List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
         String message = "";
 		for (FieldError error : fieldErrors) {
-            System.out.println(error.getField());
-			message = message.concat(error.getField() + " - " + error.getDefaultMessage()+" ");
+			message = message.concat(error.getDefaultMessage()+" ");
 		}
         ResponseDto responseDto = new ResponseDto(message);
 		return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);

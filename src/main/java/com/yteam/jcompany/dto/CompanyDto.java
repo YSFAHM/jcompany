@@ -27,7 +27,7 @@ public class CompanyDto {
     @NotBlank(message = "name is required")
     private String service;
 
-    @NotBlank(message = "name is required")
+    @NotBlank(message = "description is required")
     private String description;
 
     @NotBlank(message = "address is required")
